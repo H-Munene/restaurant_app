@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('price');
             $table->string('description');
-            $table->integer('category_id');
+            $table->foreignId('category_id')->constrained();
             $table->integer('offers');
             $table->string('allergens');
             $table->timestamps();
