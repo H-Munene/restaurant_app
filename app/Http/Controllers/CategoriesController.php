@@ -13,7 +13,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = categories::all();
+        
+        return $categories;
     }
 
     /**
