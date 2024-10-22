@@ -71,7 +71,19 @@ class MenuController extends Controller
      */
     public function update(UpdatemenuRequest $request, menu $menu)
     {
-        //
+        //go to db and find record with this id
+        $menu = Menu::find($request->id);
+
+        $menu->name = $request->name;
+        $menu->price = $request->price;
+        $menu->description = $request->description;
+        $menu->category_id = $request->category_id;
+        $menu->offers = $request->offers;
+        $menu->allergens = $request->allergens;
+
+        $menu->save();
+
+        return $menu;
     }
 
     /**
