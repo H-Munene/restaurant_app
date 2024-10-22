@@ -16,4 +16,5 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResources([
     'categories' => CategoriesController::class,
+    'menus' => MenuController::class,
 ]);
