@@ -7,6 +7,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\OrderdetailsController;
 
 
 Route::post('register', [AuthController::class, 'register']);
@@ -21,4 +22,5 @@ Route::apiResources([
     'menus' => MenuController::class,
     'orders' => OrdersController::class,
     'payments' => PaymentsController::class,
+    'orderdetails' => PaymentsController::class,
 ]);
