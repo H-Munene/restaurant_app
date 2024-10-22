@@ -14,6 +14,9 @@ class PaymentsController extends Controller
     public function index()
     {
         //
+        $payments = payments::all();
+
+        return $payments;
     }
 
     /**
@@ -30,7 +33,18 @@ class PaymentsController extends Controller
     public function store(StorepaymentsRequest $request)
     {
         //
-    }
+        $payment = new Payment;
+        $payment->user_id = $request->user_id;
+        $payment->order_id = $request->order_id;
+        $payment->payment_status = $request->payment_status;
+        $payment->payment_type = $request->payment_type;
+        $payment->amount = $request->amount;
+
+        $payment->save();
+
+        return $payment;
+        
+    }   
 
     /**
      * Display the specified resource.
@@ -54,6 +68,16 @@ class PaymentsController extends Controller
     public function update(UpdatepaymentsRequest $request, payments $payments)
     {
         //
+        $payment = Payment::find($request->payment_id);
+        $payment->user_id = $request->user_id;
+        $payment->order_id = $request->order_id;
+        $payment->payment_status = $request->payment_status;
+        $payment->payment_type = $request->payment_type;
+        $payment->amount = $request->amount;
+
+        $payment->save();
+
+        return $payment;
     }
 
     /**
