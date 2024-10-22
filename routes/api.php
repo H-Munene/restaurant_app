@@ -13,7 +13,7 @@ use App\Http\Controllers\UserController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('specificUser', [UserController::class, 'getSpecificUser']);
+Route::get('usertype', [UserController::class, 'showUserType']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
