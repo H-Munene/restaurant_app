@@ -36,6 +36,7 @@ class AuthController extends Controller
     }
 
     function login(Request $request){
+        //ensure its formatted as email and password
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -45,11 +46,12 @@ class AuthController extends Controller
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+                'email' => ['credentials are incorrect.'],
             ]);
         }
 
         return response()->json([
+            'Status' => 'Logged in',
             'user' => $user,
             'token' => $user->createToken('token-name')->plainTextToken,
         ]);

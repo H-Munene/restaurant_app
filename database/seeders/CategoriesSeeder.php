@@ -13,7 +13,7 @@ class CategoriesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // insert data
         $categories = [
             ['name' => "Sandwiches"],
             ['name' => "Main Meals"],
