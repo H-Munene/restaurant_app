@@ -65,4 +65,11 @@ class UserController extends Controller
     {
         //
     }
+
+    public function getSpecificUser(Request $request) {
+        $allusers = DB::table('users')->get();
+        $customers = $allusers->where('user_type', $request->user_type);
+        
+        return $customers;
+    }
 }
