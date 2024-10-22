@@ -32,7 +32,10 @@ class MenuController extends Controller
      */
     public function store(StoremenuRequest $request)
     {
-        //
+        /*
+        syntax:
+            $menu->column_name = $request->parameter_name;
+        */
         $menu = new Menu; //create new Menu instance
         $menu->name = $request->name;
         $menu->price = $request->price;
@@ -42,6 +45,8 @@ class MenuController extends Controller
         $menu->allergens = $request->allergens;
 
         $menu->save();
+
+        return $menu;
     }
 
     /**
