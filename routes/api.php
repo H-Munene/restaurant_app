@@ -13,7 +13,6 @@ use App\Http\Controllers\UserController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('allusers', [UserController::class, 'allusers']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -25,4 +24,5 @@ Route::apiResources([
     'orders' => OrdersController::class,
     'payments' => PaymentsController::class,
     'orderdetails' => PaymentsController::class,
+    'users' => UserController::class,
 ]);

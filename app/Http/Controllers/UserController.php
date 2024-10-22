@@ -13,6 +13,9 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = DB::table('users')->get();
+
+        return $users;
     }
 
     /**
@@ -61,11 +64,5 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function allusers(){ 
-        $users = DB::table('users')->get();
-
-        return $users;
     }
 }
