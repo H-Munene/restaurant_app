@@ -8,10 +8,12 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\OrderdetailsController;
+use App\Http\Controllers\UserController;
 
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('allusers', [UserController::class, 'allusers']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
