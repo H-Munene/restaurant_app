@@ -33,7 +33,7 @@ class OrdersController extends Controller
     public function store(StoreordersRequest $request)
     {
         //
-        $order = new Order;
+        $order = new orders;
         $order->user_id =$request->user_id;
         $order->order_type =$request->order_type;
         $order->order_total =$request->order_total;

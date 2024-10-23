@@ -67,10 +67,10 @@ class UserController extends Controller
     }
 
     //get users based in user_type
-    public function showUserType(Request $request) {
-        $customers = DB::table('users')->get()
-            ->where('user_type', $request->user_type);
+    // public function showUserType(Request $request) {
+    //     $customers = DB::table('users')->get()
+    //         ->where('user_type', $request->user_type);
 
-        return $customers;
-    }
+    //     return $customers;
+    // }
 }

@@ -15,7 +15,7 @@ class MenuController extends Controller
     {
         //
         $menu = menu::all();
-
+        
         return $menu;
     }
 
@@ -54,14 +54,14 @@ class MenuController extends Controller
         //     'allergens' => 'required|string|max:255',
         // ]);
 
-        $menu = menu::firstOrNew(
-            ['name' => $request->name],
-            ['price' => $request->price],
-            ['description' => $request->description],
-            ['category_id' => $request->category_id],
-            ['offers' => $request->offers],
-            ['allergens' => $request->allergens],
-        );
+        // $menu = menu::firstOrNew(
+        //     ['name' => $request->name],
+        //     ['price' => $request->price],
+        //     ['description' => $request->description],
+        //     ['category_id' => $request->category_id],
+        //     ['offers' => $request->offers],
+        //     ['allergens' => $request->allergens],
+        // );
         // $menu = menu::create([
         //     'name' => $request->name,
         //     'price' => $request->price,
