@@ -36,6 +36,7 @@ class MenuController extends Controller
         syntax:
             $menu->column_name = $request->parameter_name;
         */
+
         $menu = new Menu; //create new Menu instance
         $menu->name = $request->name;
         $menu->price = $request->price;
@@ -44,8 +45,32 @@ class MenuController extends Controller
         $menu->offers = $request->offers;
         $menu->allergens = $request->allergens;
 
-        $menu->save();
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'price' => 'required|integer',
+        //     'description' => 'required|string|max:255',
+        //     'category_id' => 'required|exists:categories,id',
+        //     'offers' => 'required|integer',
+        //     'allergens' => 'required|string|max:255',
+        // ]);
 
+        $menu = menu::firstOrNew(
+            ['name' => $request->name],
+            ['price' => $request->price],
+            ['description' => $request->description],
+            ['category_id' => $request->category_id],
+            ['offers' => $request->offers],
+            ['allergens' => $request->allergens],
+        );
+        // $menu = menu::create([
+        //     'name' => $request->name,
+        //     'price' => $request->price,
+        //     'description' => $request->description,
+        //     'category_id' => $request->category_id,
+        //     'offers' => $request->offers,
+        //     'allergens' => $request->allergens,
+        // ]);
+        $menu->save();
         return $menu;
     }
 

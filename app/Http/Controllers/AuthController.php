@@ -28,7 +28,7 @@ class AuthController extends Controller
             'phone' => $request -> phone,
             'location' => $request -> location,
         ]);
-
+ 
         return response()->json([
             'user' => $user,
             'token' => $user->createToken('token-name')->plainTextToken,

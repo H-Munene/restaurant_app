@@ -10,10 +10,10 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\OrderdetailsController;
 use App\Http\Controllers\UserController;
 
-
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('usertype', [UserController::class, 'showUserType']);
+Route::post('menuitem', [MenuController::class, 'store']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -27,3 +27,4 @@ Route::apiResources([
     'orderdetails' => PaymentsController::class,
     'users' => UserController::class,
 ]);
+
