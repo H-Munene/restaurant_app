@@ -33,7 +33,7 @@ class PaymentsController extends Controller
     public function store(StorepaymentsRequest $request)
     {
         //
-        $payment = new Payment;
+        $payment = new Payments;
         $payment->user_id = $request->user_id;
         $payment->order_id = $request->order_id;
         $payment->payment_status = $request->payment_status;
