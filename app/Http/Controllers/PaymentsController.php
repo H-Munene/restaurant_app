@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\payments;
 use App\Http\Requests\StorepaymentsRequest;
 use App\Http\Requests\UpdatepaymentsRequest;
@@ -14,8 +15,8 @@ class PaymentsController extends Controller
     public function index()
     {
         //
-        $payments = payments::all();
-
+        $payments = DB::table('payments')->get();
+        
         return $payments;
     }
 

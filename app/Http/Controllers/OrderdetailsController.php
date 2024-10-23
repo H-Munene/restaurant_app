@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\orderdetails;
 use App\Http\Requests\StoreorderdetailsRequest;
 use App\Http\Requests\UpdateorderdetailsRequest;
@@ -14,7 +15,7 @@ class OrderdetailsController extends Controller
     public function index()
     {
         //
-        $orderdetails = orderdetails::all();
+        $orderdetails = DB::table('order_details')->get();
 
         return $orderdetails;
     }

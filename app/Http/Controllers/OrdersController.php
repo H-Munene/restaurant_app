@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\orders;
 use App\Http\Requests\StoreordersRequest;
 use App\Http\Requests\UpdateordersRequest;
@@ -14,7 +15,7 @@ class OrdersController extends Controller
     public function index()
     {
         //
-        $orders = orders::all();
+        $orders = DB::table('orders')->get();
         
         return $orders;
     }

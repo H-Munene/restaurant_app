@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\menu;
 use App\Http\Requests\StoremenuRequest;
 use App\Http\Requests\UpdatemenuRequest;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -14,7 +15,8 @@ class MenuController extends Controller
     public function index()
     {
         //
-        $menu = menu::all();
+        // $menu = menu::all();
+        $menu = DB::table('menus')->get();
         
         return $menu;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\categories;
 use App\Http\Requests\StorecategoriesRequest;
 use App\Http\Requests\UpdatecategoriesRequest;
@@ -13,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = categories::all();
+        $categories = DB::table('categories')->get();
         
         return $categories;
     }

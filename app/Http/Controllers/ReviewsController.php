@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\reviews;
 use App\Http\Requests\StorereviewsRequest;
 use App\Http\Requests\UpdatereviewsRequest;
@@ -14,6 +15,9 @@ class ReviewsController extends Controller
     public function index()
     {
         //
+        $reviews = DB::table('reviews')->get();
+        
+        return $reviews;
     }
 
     /**
