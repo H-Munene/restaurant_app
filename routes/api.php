@@ -19,12 +19,13 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResources([
-    'categories' => CategoriesController::class,
-    'menus' => MenuController::class,
-    'orders' => OrdersController::class,
-    'payments' => PaymentsController::class,
-    'orderdetails' => PaymentsController::class,
-    'users' => UserController::class,
-]);
-
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResources([
+        'categories' => CategoriesController::class,
+        'menus' => MenuController::class,
+        'orders' => OrdersController::class,
+        'payments' => PaymentsController::class,
+        'orderdetails' => PaymentsController::class,
+        'users' => UserController::class,
+    ]);
+});
