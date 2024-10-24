@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use App\Models\payments;
+use Illuminate\Support\Facades\DB;
+use App\Notifications\SendPaymentEmail;
 use App\Http\Requests\StorepaymentsRequest;
 use App\Http\Requests\UpdatepaymentsRequest;
 
@@ -41,10 +43,12 @@ class PaymentsController extends Controller
         $payment->payment_type = $request->payment_type;
         $payment->amount = $request->amount;
 
+        $user = User::find($request->user_id); ///get user by user_id
+        $user->notify(new SendPaymentEmail($user, $payment));
+
         $payment->save();
 
         return $payment;
-        
     }   
 
     /**
