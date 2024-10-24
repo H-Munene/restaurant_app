@@ -12,13 +12,17 @@ use Illuminate\Notifications\Notification;
 class SendPaymentEmail extends Notification
 {
     use Queueable;
+    
+    protected $user;
+    protected $payment; 
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(User $user, Payments $payment)
     {
-        //
+        $this->$user = $user;
+        $this->$payment = $payment;
     }
 
     /**
