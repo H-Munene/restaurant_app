@@ -19,10 +19,10 @@ class SendPaymentEmail extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(User $user, Payments $payment)
+    public function __construct(User $user, payments $payment)
     {
-        $this->$user = $user;
-        $this->$payment = $payment;
+        $this->user = $user;
+        $this->payment = $payment;
     }
 
     /**
@@ -41,9 +41,13 @@ class SendPaymentEmail extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        ->subject('Your MyRestaurant Payment Notice')
+        ->greeting('Hi '. $this->user->name)
+        ->line('We have received payment for your order no: '. $this->payment->order_id)
+        ->line('Your order is currently being processed and will be dispatched soon')
+        // ->action('Notification Action', url('/'))
+        ->line('Thank you for using our application!');			
+
     }
 
     /**
