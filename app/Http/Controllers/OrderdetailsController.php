@@ -34,7 +34,7 @@ class OrderdetailsController extends Controller
     public function store(StoreorderdetailsRequest $request)
     {
         //
-        $orderdetails = new OrderDetails;
+        $orderdetails = new orderdetails;
         $orderdetails->menu_id = $request->menu_id;
         $orderdetails->order_id = $request->order_id; 
         $orderdetails->quantity = $request->quantity;
