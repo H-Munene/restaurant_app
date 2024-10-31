@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\orders;
-use App\Models\menu;
 use App\Models\User;
 use App\Models\orderdetails;
-use App\Http\Requests\StoreordersRequest;
-use App\Http\Requests\UpdateordersRequest;
+use App\Models\menu;
+use App\Http\Requests\StoreOrdersRequest;
+use App\Http\Requests\UpdateOrdersRequest;
 
 class OrdersController extends Controller
 {
@@ -17,26 +16,24 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
-        $orders = DB::table('orders')->get();
-        
+        $orders = orders::all();
         return $orders;
     }
-    public function getOrderDetails($order_id){
-        $order = orders::find($order_id);
-        //user 
-        $order->user = User::find($order->user_id);
-        //order details
-        $order->order_details = orderdetails::where('order_id', $order->id)->get();
-        //menu
-        foreach ($order->order_details as $order_detail){
-            $menu = menu::find($order_detail->menu_id);
-            $order_detail->menu_name = $menu->name;
-            $order_detail->menu_price = $menu->price;
+    public function getOrderDetails($user_id){
+        $order = orders::where('user_id', $user_id)->get();
+
+        foreach ($order as $o){
+            $o->user = User::find($user_id);
+            $o->order_details = orderdetails::where('order_id', $o->id)->get();
+            //menu
+            foreach ($o->order_details as $order_detail){
+                $menu = menu::find($order_detail->menu_id);
+                $order_detail->menu_name = $menu->name;
+                $order_detail->menu_price = $menu->price;
+            }
         }
         return $order;
-    }		
-
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -48,33 +45,39 @@ class OrdersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreordersRequest $request)
+    public function store(StoreOrdersRequest $request)
     {
-        //
         $order = new orders;
-        $order->user_id =$request->user_id;
-        $order->order_type =$request->order_type;
-        $order->order_total =$request->order_total;
-        $order->order_status =$request->order_status;
-        
+        $order->user_id = $request->user_id;
+        $order->order_type = $request->order_type;
+        $order->order_status = 'Not Paid';
+        $order->order_total = $request->order_total;
         $order->save();
+
+        //insert order details
+        foreach ($request->order_details as $menu_item){
+
+            $order_details = new orderdetails;
+            $order_details->order_id = $order->id;
+            $order_details->menu_id = $menu_item['id'];
+            $order_details->quantity = $menu_item['quantity'];
+            $order_details->save();
+        }
 
         return $order;
     }
-
     /**
      * Display the specified resource.
      */
-    public function show(orders $orders)
+    public function show(Orders $orders)
     {
         //
-        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(orders $orders)
+    public function edit(Orders $orders)
     {
         //
     }
@@ -82,25 +85,21 @@ class OrdersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateordersRequest $request, orders $orders)
+    public function update(UpdateOrdersRequest $request, Orders $orders)
     {
-        //
-        $order = Order::find($request->order_id);
-
-        $order->user_id =$request->user_id;
-        $order->order_type =$request->order_type;
-        $order->order_total =$request->order_total;
-        $order->order_status =$request->order_status;
-        
+        $order = orders::find($request->id);
+        $order->user_id = $request->user_id;
+        $order->order_type = $request->order_type;
+        $order->order_status = $request->order_status;
+        $order->order_total = $request->order_total;
         $order->save();
-
         return $order;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(orders $orders)
+    public function destroy(Orders $orders)
     {
         //
     }

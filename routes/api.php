@@ -13,6 +13,7 @@ use App\Http\Controllers\ReviewsController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('/getOrderDetails/{id}', [OrdersController::class, 'getOrderDetails']);
 // Route::get('usertype', [UserController::class, 'showUserType']);
 // Route::post('menuitem', [MenuController::class, 'store']);
 
@@ -30,6 +31,5 @@ Route::get('/user', function (Request $request) {
         'users' => UserController::class,
         'reviews' => ReviewsController::class,
     ]);
-    Route::get('/getOrderDetails/{id}', [OrdersController::class, 'getOrderDetails']);
 
 // });

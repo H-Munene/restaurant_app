@@ -47,7 +47,6 @@ class SendPaymentEmail extends Notification
         ->line('Your order is currently being processed and will be dispatched soon')
         // ->action('Notification Action', url('/'))
         ->line('Thank you for using our application!');			
-
     }
 
     /**
